@@ -15,6 +15,7 @@ export class AppComponent {
     console.log("hello");
     this.getPatient();
     this.getPractitionner();
+    this.getCommunication();
   }
   getPatient() {
     return (this.http.get(this.apiURL+'/patient/613f4788a5b46400122cf50e').forEach(patient => { console.log(patient); this.patient = patient; }));
@@ -22,6 +23,10 @@ export class AppComponent {
   }
   getPractitionner() {
     return (this.http.get(this.apiURL+'/practitioner/613f51d8a5b46400122cf511').forEach(doctor => { console.log(doctor); this.doctor = doctor; }));
+
+  }
+  getCommunication() {
+    return (this.http.get(this.apiURL+'/communication').forEach(comm => { console.log(comm);  }));
 
   }
 }

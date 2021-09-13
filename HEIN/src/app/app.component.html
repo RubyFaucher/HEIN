@@ -1,5 +1,22 @@
-{{patient.gender}}
-{{patient.id}}
-{{patient.name[0].family}}
-{{patient.name[0].given[0]}}
+<mat-toolbar >
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <img class='logo' src="assets/logo.png">
+  <span class="example-spacer"></span>
+  <input
+  class="example-form"
+  type="text"
+  id="input"
+  matInput
+  placeholder="Recherche"
+/>
+<span class="example-spacer"></span>
+<span>{{patient.name[0].family}}
+{{patient.name[0].given[0]}}</span>
+<mat-icon class='user-icon'>account_circle</mat-icon>
+</mat-toolbar>
+
+
+
 
