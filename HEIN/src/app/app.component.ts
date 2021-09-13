@@ -8,17 +8,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'HEIN';
-  private apiURL = "https://fhir.eole-consulting.io/api/patient/613f4788a5b46400122cf50e";
-  data: any = {};
+  private apiURL = "https://fhir.eole-consulting.io/api";
+  patient: any = {};
+  doctor: any = {};
   constructor(private http: HttpClient) {
     console.log("hello");
-    this.getData();
-  }
-  getData() {
-    return (this.http.get(this.apiURL).forEach(patient => { console.log(patient); this.data = patient; }));
-
+    this.getPatient();
+    this.getPractitionner();
   }
   getPatient() {
+    return (this.http.get(this.apiURL+'/patient/613f4788a5b46400122cf50e').forEach(patient => { console.log(patient); this.patient = patient; }));
+
+  }
+  getPractitionner() {
+    return (this.http.get(this.apiURL+'/practitioner/613f51d8a5b46400122cf511').forEach(doctor => { console.log(doctor); this.doctor = doctor; }));
 
   }
 }
