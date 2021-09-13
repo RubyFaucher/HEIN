@@ -1,22 +1,37 @@
-<mat-toolbar >
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+<mat-toolbar>
+    <!-- <button mat-icon-button class="example-icon" color="primary" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
-  </button>
-  <img class='logo' src="assets/logo.png">
-  <span class="example-spacer"></span>
-  <input
-  class="example-form"
-  type="text"
-  id="input"
-  matInput
-  placeholder="Recherche"
-/>
-<span class="example-spacer"></span>
-<span>{{patient.name[0].family}}
-{{patient.name[0].given[0]}}</span>
-<mat-icon class='user-icon'>account_circle</mat-icon>
+  </button> -->
+    <img class='logo' src="assets/logo.png">
+    <span class="example-spacer"></span>
+    <input class="example-form" type="text" id="input" matInput placeholder="Recherche" />
+    <span class="example-spacer"></span>
+    <span>{{patient.name[0].family}}
+        {{patient.name[0].given[0]}}</span>
+    <mat-icon class='user-icon'>account_circle</mat-icon>
 </mat-toolbar>
+<div class="text">
+    <table className="table table-unbordered">
+        <tbody>
+            <tr>
+                <th>
+                    <p class="docName"><b>Docteur <span class="name">{{doctor.name[0].family}}</span></b></p>
+                    <p>Heure du rdv :
+                    </p>
+                    <p>
+                        Retard de X minutes
+                    </p>
+                </th>
+                <th>
+                    <div><button class="handle-btn" mat-button>Confirmer</button></div>
+                    <div><button class="handle-btn" mat-button>Confirmer</button></div>
+                    <div><button class="handle-btn" mat-button>Confirmer</button></div>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 
 
-
+<mat-card class="card-bar" color="primary">{{patient.name[0].family}}</mat-card>
