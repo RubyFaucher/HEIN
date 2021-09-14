@@ -1,18 +1,16 @@
 <mat-toolbar>
-  <img class="logo" src="assets/logo.png" />
-  <span class="example-spacer"></span>
-  <div (click)="openModal()" class="user-profile">
-    <span class="user-name"
-      >{{ patient.name[0].family }} {{ patient.name[0].given[0] }}</span
-    >
-    <mat-icon (click)="openModal()" class="user-icon">account_circle</mat-icon>
-  </div>
+    <img class="logo" src="assets/logo.png" />
+    <span class="example-spacer"></span>
+    <div (click)="openModal()" class="user-profile">
+        <span class="user-name">{{ patient.name[0].family }} {{ patient.name[0].given[0] }}</span>
+        <mat-icon (click)="openModal()" class="user-icon">account_circle</mat-icon>
+    </div>
 </mat-toolbar>
 <h1 class="bienvenue">
-  Bienvenue {{ appointment.participant[0].actor.display }}
+    Bienvenue {{ appointment.participant[0].actor.display }}
 </h1>
 <div class="text">
-    <table className="table table-unbordered">
+    <table class="table table-unbordered">
         <tbody>
             <tr>
                 <th>
@@ -26,19 +24,28 @@
                 </th>
                 <th>
                     <div>
-                      <button class="handle-btn" mat-button (click)="popupConfirm()" [ngClass]="{'handle-btn' : toggle, 'red': !toggle}">Confirmer le RDV</button></div>
+                        <button class="handle-btn" mat-button (click)="popupConfirm()"
+                            [ngClass]="{'handle-btn' : toggle, 'red': !toggle}">Confirmer le RDV</button>
+                    </div>
                     <div><button class="handle-btn" mat-button>Reporter le RDV</button></div>
-                    <div><button class="handle-btn"  mat-button (click)="delAppointment(appointment.id)">Annuler le RDV</button></div>
+                    <div><button class="handle-btn" mat-button (click)="delAppointment(appointment.id)">Annuler le
+                            RDV</button></div>
                 </th>
             </tr>
         </tbody>
     </table>
 </div>
-
-<mat-card class="card-bar" color="primary">{{value}}</mat-card>
-
-<input (keyup)="onKey($event)" />
-<button class="handle-btn" mat-button  (click)="getCommunication(value)" >Confirmer</button>
-
-
-
+<table class="table table-unbordered chat">
+    <tbody>
+        <tr>
+            <th>
+                <mat-card class="card-bar-patient" *ngFor="let communication of com" color="primary">{{communication.payload[0].contentString}}</mat-card>
+                <input class="champ" (keyup)="onKey($event)" onfocus="this.value=''"/>
+                <button class="handle-btn" mat-button (click)="postCommunication(value)">Confirmer</button>
+            </th>
+            <th>
+                <mat-card class="card-bar-medecin" *ngFor="let communication of com" color="primary">{{communication.payload[0].contentString}}</mat-card>
+            </th>
+        </tr>
+    </tbody>
+</table>

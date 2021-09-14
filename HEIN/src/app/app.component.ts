@@ -3,9 +3,6 @@ import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
 
-
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,18 +13,20 @@ export class AppComponent {
   private apiURL = 'https://fhir.eole-consulting.io/api';
   patient: any = {};
   doctor: any = {};
-  id: any={};
+  id: any = {};
   YourTextData: any = {};
   value: any = {};
   toggle = true;
-  status = "Enable";
-
+  status = 'enable';
+  com: any = {};
   appointment: any = {};
-  constructor(private http: HttpClient,public matDialog: MatDialog) {
+
+  constructor(private http: HttpClient, public matDialog: MatDialog) {
     this.getPatient();
     this.getPractitionner();
     this.getAppointment();
     this.delAppointment(this.id);
+    this.getCommunication();
   }
   getPatient() {
     return this.http
@@ -46,36 +45,70 @@ export class AppComponent {
   openModal() {
     const dialogConfig = new MatDialogConfig();
     //dialogConfig.disableClose = true;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "350px";
-    dialogConfig.width = "600px";
+    dialogConfig.id = 'modal-component';
+    dialogConfig.height = '350px';
+    dialogConfig.width = '600px';
     dialogConfig.data = this.patient;
     const modalDialog = this.matDialog.open(ModalComponent, dialogConfig);
   }
-  getCommunication(YourTextData) {
-    return this.http.post(this.apiURL + '/communication', {
 
-      "resourceType": "Communication",
-      "text": {
-        "status": "generated",
-        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Test</div>"
-      },
-      "subject": {
-        "reference": "Patient/613f4788a5b46400122cf50e"
-      },
-      "recipient": [
-        {
-          "reference": "Practitioner/613f51d8a5b46400122cf511"
-        }
-      ],
-      "payload": [
-        {
-          "contentString": YourTextData
-        }
-      ]
-    }, { headers: { 'Content-Type': 'application/json' } }).subscribe(data => {
-      console.log(data);
+  getCommunication() {
+    return this.http.get(this.apiURL + '/communication').forEach((com) => {
+      this.com=com;
+      // console.log('debut')
+      // console.log(com)
+      // for (let i in com) {
+      //   if(com[i].subject.reference){
+      //     console.log('ta mere la pute')
+      //       this.com=com
+      //   }
+      // }
+      // for (let i in com) {
+      //   console.log('for')
+      //   console.log(com)
+      //   if (com[i].subject.reference == 'Patient/613f4788a5b46400122cf50e') {
+      //     console.log('if')
+      //     console.log(com)
+      //     let test = com[i];
+      //     console.log('test')
+      //     console.log(test)
+      //     this.com = test;
+      //     console.log('fin')
+      //     console.log(com)
+      //   }
+      // }
     });
+  }
+
+  postCommunication(YourTextData) {
+    return this.http
+      .post(
+        this.apiURL + '/communication',
+        {
+          resourceType: 'Communication',
+          text: {
+            status: 'generated',
+            div: '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>',
+          },
+          subject: {
+            reference: 'Patient/613f4788a5b46400122cf50e',
+          },
+          recipient: [
+            {
+              reference: 'Practitioner/613f51d8a5b46400122cf511',
+            },
+          ],
+          payload: [
+            {
+              contentString: YourTextData,
+            },
+          ],
+        },
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 
   onKey(event: any) {
@@ -87,24 +120,26 @@ export class AppComponent {
       .get(this.apiURL + '/appointment')
       .forEach((appointment) => {
         for (let i in appointment) {
-          if (appointment[i].participant[0].actor.display == "Justin Mazoyer") {
-            let test = appointment[i]
+          if (appointment[i].participant[0].actor.display == 'Justin Mazoyer') {
+            let test = appointment[i];
             this.appointment = test;
-          }else{
-            console.log("error")
+          } else {
+            console.log('error');
           }
         }
       });
   }
 
-  delAppointment(id){
-    return (this.http.delete(this.apiURL+'/appointment/'+id).forEach(appointment => { console.log(appointment);      
-       }))
+  delAppointment(id) {
+    return this.http
+      .delete(this.apiURL + '/appointment/' + id)
+      .forEach((appointment) => {
+        console.log(appointment);
+      });
   }
-popupConfirm(){
-  alert('Votre RDV est confirmé')
-  this.toggle = !this.toggle;
-  this.status = this.toggle ? "Enable" : "Disable";
-}
-
+  popupConfirm() {
+    alert('Votre RDV est confirmé');
+    this.toggle = !this.toggle;
+    this.status = this.toggle ? 'enable' : 'disable';
+  }
 }
