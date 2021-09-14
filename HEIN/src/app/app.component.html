@@ -1,12 +1,16 @@
 <mat-toolbar>
-
-    <img class='logo' src="assets/logo.png">
-    <span class="example-spacer"></span>
-   <div (click)="openModal()" class='user-profile'> <span class='user-name'>{{patient.name[0].family}}
-        {{patient.name[0].given[0]}}</span>
-    <mat-icon (click)="openModal()" class='user-icon'>account_circle</mat-icon></div>
+  <img class="logo" src="assets/logo.png" />
+  <span class="example-spacer"></span>
+  <div (click)="openModal()" class="user-profile">
+    <span class="user-name"
+      >{{ patient.name[0].family }} {{ patient.name[0].given[0] }}</span
+    >
+    <mat-icon (click)="openModal()" class="user-icon">account_circle</mat-icon>
+  </div>
 </mat-toolbar>
-<h1 class="bienvenue">Bienvenue {{appointment.participant[0].actor.display}}</h1>
+<h1 class="bienvenue">
+  Bienvenue {{ appointment.participant[0].actor.display }}
+</h1>
 <div class="text">
     <table className="table table-unbordered">
         <tbody>
@@ -31,6 +35,11 @@
     </table>
 </div>
 
+<mat-card class="card-bar" color="primary">{{
+  patient.name[0].family
+}}</mat-card>
+
 
 
 <mat-card class="card-bar" color="primary">{{patient.name[0].family}}</mat-card>
+

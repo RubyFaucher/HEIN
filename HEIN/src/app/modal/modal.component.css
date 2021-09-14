@@ -11,4 +11,6 @@
 .mat-btn{
   background-color:#ff4f63;
   color: white;
+  width: 120px;
+  border-radius: 10px;
 }

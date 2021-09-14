@@ -33,6 +33,8 @@ mat-toolbar{
     color: white;
     margin-top: 20px;
     margin-left: 100px;
+    border-radius: 0px;
+    width:190px;
 }
 
 .text{
@@ -57,9 +59,9 @@ mat-toolbar{
     color: black;
     position: relative;
     margin-left: 30%;
-   
+
   }
-  
+
 .bienvenue::before {
     position: absolute;
     top: 0;
