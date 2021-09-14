@@ -17,6 +17,8 @@ export class AppComponent {
   patient: any = {};
   doctor: any = {};
   id: any={};
+  YourTextData: any = {};
+  value: any = {};
   toggle = true;
   status = "Enable";
 
@@ -24,7 +26,6 @@ export class AppComponent {
   constructor(private http: HttpClient,public matDialog: MatDialog) {
     this.getPatient();
     this.getPractitionner();
-    this.getCommunication();
     this.getAppointment();
     this.delAppointment(this.id);
   }
@@ -51,9 +52,36 @@ export class AppComponent {
     dialogConfig.data = this.patient;
     const modalDialog = this.matDialog.open(ModalComponent, dialogConfig);
   }
-  getCommunication() {
-    return this.http.get(this.apiURL + '/communication').forEach((comm) => {});
+  getCommunication(YourTextData) {
+    return this.http.post(this.apiURL + '/communication', {
+
+      "resourceType": "Communication",
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Test</div>"
+      },
+      "subject": {
+        "reference": "Patient/613f4788a5b46400122cf50e"
+      },
+      "recipient": [
+        {
+          "reference": "Practitioner/613f51d8a5b46400122cf511"
+        }
+      ],
+      "payload": [
+        {
+          "contentString": YourTextData
+        }
+      ]
+    }, { headers: { 'Content-Type': 'application/json' } }).subscribe(data => {
+      console.log(data);
+    });
   }
+
+  onKey(event: any) {
+    this.value = event.target.value;
+  }
+
   getAppointment() {
     return this.http
       .get(this.apiURL + '/appointment')

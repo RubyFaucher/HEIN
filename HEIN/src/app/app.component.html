@@ -35,6 +35,10 @@
     </table>
 </div>
 
-<mat-card class="card-bar" color="primary">Je suis une carte</mat-card>
+<mat-card class="card-bar" color="primary">{{value}}</mat-card>
+
+<input (keyup)="onKey($event)" />
+<button class="handle-btn" mat-button  (click)="getCommunication(value)" >Confirmer</button>
+
 
 
