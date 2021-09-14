@@ -4,29 +4,54 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'HEIN';
-  private apiURL = "https://fhir.eole-consulting.io/api";
+  private apiURL = 'https://fhir.eole-consulting.io/api';
   patient: any = {};
   doctor: any = {};
+  appointment: any = {};
   constructor(private http: HttpClient) {
-    console.log("hello");
     this.getPatient();
     this.getPractitionner();
     this.getCommunication();
+    this.getAppointment();
   }
   getPatient() {
-    return (this.http.get(this.apiURL+'/patient/613f4788a5b46400122cf50e').forEach(patient => { console.log(patient); this.patient = patient; }));
-
+    return this.http
+      .get(this.apiURL + '/patient/613f4788a5b46400122cf50e')
+      .forEach((patient) => {
+        this.patient = patient;
+      });
   }
   getPractitionner() {
-    return (this.http.get(this.apiURL+'/practitioner/613f51d8a5b46400122cf511').forEach(doctor => { console.log(doctor); this.doctor = doctor; }));
-
+    return this.http
+      .get(this.apiURL + '/practitioner/613f51d8a5b46400122cf511')
+      .forEach((doctor) => {
+        this.doctor = doctor;
+      });
   }
   getCommunication() {
-    return (this.http.get(this.apiURL+'/communication').forEach(comm => { console.log(comm);  }));
-
+    return this.http.get(this.apiURL + '/communication').forEach((comm) => {});
   }
+  getAppointment() {
+    return this.http
+      .get(this.apiURL + '/appointment')
+      .forEach((appointment) => {
+        for (let i in appointment) {
+          if (appointment[i].participant[0].actor.display == "Justin Mazoyer") {
+            let test = appointment[i]
+            this.appointment = test;
+          }else{
+            console.log("error")
+          }
+        }
+      });
+  }
+
+  // delAppointment(){
+  //   return (this.http.delete(this.apiURL+'/appointment/').forEach(appointment => { console.log(appointment);
+  //     this.appointment = appointment; }))
+  // }
 }
