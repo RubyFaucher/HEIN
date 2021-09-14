@@ -17,6 +17,8 @@ export class AppComponent {
   patient: any = {};
   doctor: any = {};
   id: any={};
+  toggle = true;
+  status = "Enable";
 
   appointment: any = {};
   constructor(private http: HttpClient,public matDialog: MatDialog) {
@@ -68,11 +70,13 @@ export class AppComponent {
   }
 
   delAppointment(id){
-    return (this.http.delete(this.apiURL+'/appointment/'+id).forEach(appointment => { console.log(appointment);
+    return (this.http.delete(this.apiURL+'/appointment/'+id).forEach(appointment => { console.log(appointment);      
        }))
   }
 popupConfirm(){
   alert('Votre RDV est confirmé')
+  this.toggle = !this.toggle;
+  this.status = this.toggle ? "Enable" : "Disable";
 }
 
 }

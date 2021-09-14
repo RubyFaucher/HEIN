@@ -26,17 +26,15 @@
                 </th>
                 <th>
                     <div>
-                      <button class="handle-btn" mat-button (click)="popupConfirm()">Confirmer</button></div>
-                    <div><button class="handle-btn" mat-button>Reporter</button></div>
-                    <div><button class="handle-btn"  mat-button (click)="delAppointment(appointment.id)">Annuler</button></div>
+                      <button class="handle-btn" mat-button (click)="popupConfirm()" [ngClass]="{'handle-btn' : toggle, 'red': !toggle}">Confirmer le RDV</button></div>
+                    <div><button class="handle-btn" mat-button>Reporter le RDV</button></div>
+                    <div><button class="handle-btn"  mat-button (click)="delAppointment(appointment.id)">Annuler le RDV</button></div>
                 </th>
             </tr>
         </tbody>
     </table>
 </div>
 
-<mat-card class="card-bar" color="primary">{{
-  patient.name[0].family
-}}</mat-card>
+<mat-card class="card-bar" color="primary">Je suis une carte</mat-card>
 
 

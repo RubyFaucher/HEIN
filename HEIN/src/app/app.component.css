@@ -74,3 +74,12 @@ mat-toolbar{
     display: block;
     mix-blend-mode: screen;
 }
+
+.red {
+    background: #ffb58a;
+    color: white;
+    margin-top: 20px;
+    margin-left: 100px;
+    border-radius: 0px;
+    width:190px;
+  }
