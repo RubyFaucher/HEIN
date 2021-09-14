@@ -8,10 +8,16 @@ mat-toolbar{
   width:100px;
   height: 100px;
 }
-.user-icon{
+.user-profile{
   color:#ffffff;
 }
-
+.user-profile:hover {
+  cursor: pointer;
+  color:#ffb58a;
+}
+.user-name{
+  margin-right: 10px;;
+}
 .card-bar{
     background: linear-gradient(to right, #ff0065, #ff4f63,#ffb58a);
     margin-top: 50px;
@@ -32,7 +38,7 @@ mat-toolbar{
 }
 
 /* .docName{
- 
+
 } */
 
 .name{

@@ -1,5 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ModalComponent } from './modal/modal.component';
+
+
+
 
 @Component({
   selector: 'app-root',
@@ -11,8 +16,9 @@ export class AppComponent {
   private apiURL = 'https://fhir.eole-consulting.io/api';
   patient: any = {};
   doctor: any = {};
+
   appointment: any = {};
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,public matDialog: MatDialog) {
     this.getPatient();
     this.getPractitionner();
     this.getCommunication();
@@ -31,6 +37,15 @@ export class AppComponent {
       .forEach((doctor) => {
         this.doctor = doctor;
       });
+  }
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    //dialogConfig.disableClose = true;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "350px";
+    dialogConfig.width = "600px";
+    dialogConfig.data = this.patient;
+    const modalDialog = this.matDialog.open(ModalComponent, dialogConfig);
   }
   getCommunication() {
     return this.http.get(this.apiURL + '/communication').forEach((comm) => {});
@@ -54,4 +69,5 @@ export class AppComponent {
   //   return (this.http.delete(this.apiURL+'/appointment/').forEach(appointment => { console.log(appointment);
   //     this.appointment = appointment; }))
   // }
+
 }
