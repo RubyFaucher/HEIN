@@ -16,6 +16,7 @@ export class AppComponent {
   private apiURL = 'https://fhir.eole-consulting.io/api';
   patient: any = {};
   doctor: any = {};
+  id: any={};
 
   appointment: any = {};
   constructor(private http: HttpClient,public matDialog: MatDialog) {
@@ -23,6 +24,7 @@ export class AppComponent {
     this.getPractitionner();
     this.getCommunication();
     this.getAppointment();
+    this.delAppointment(this.id);
   }
   getPatient() {
     return this.http
@@ -70,7 +72,7 @@ export class AppComponent {
        }))
   }
 popupConfirm(){
-  alert('RDV confirmé')
+  alert('Votre RDV est confirmé')
 }
+
 }
-// this.appointment = appointment;
