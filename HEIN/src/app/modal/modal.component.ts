@@ -9,13 +9,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ModalComponent implements OnInit {
   patient: any = {};
 
-
   constructor(@Inject(MAT_DIALOG_DATA) data) {
     this.patient = data;
   }
 
-  ngOnInit(): void {
-    console.log(this.patient);
-  }
-
+  ngOnInit(): void {}
 }
