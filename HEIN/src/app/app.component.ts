@@ -65,9 +65,12 @@ export class AppComponent {
       });
   }
 
-  // delAppointment(){
-  //   return (this.http.delete(this.apiURL+'/appointment/').forEach(appointment => { console.log(appointment);
-  //     this.appointment = appointment; }))
-  // }
-
+  delAppointment(id){
+    return (this.http.delete(this.apiURL+'/appointment/'+id).forEach(appointment => { console.log(appointment);
+       }))
+  }
+popupConfirm(){
+  alert('RDV confirmé')
 }
+}
+// this.appointment = appointment;

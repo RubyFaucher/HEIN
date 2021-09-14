@@ -22,8 +22,7 @@ mat-toolbar{
 .user-name{
   margin-right: 10px;;
 }
-.user-icon{
-}
+
 .card-bar{
     background: linear-gradient(to right, #ff0065, #ff4f63,#ffb58a);
     margin-top: 50px;
