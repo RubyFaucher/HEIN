@@ -22,9 +22,9 @@
                 </th>
                 <th>
                     <div>
-                      <button class="handle-btn" mat-button>Confirmer</button></div>
+                      <button class="handle-btn" mat-button (click)="popupConfirm()">Confirmer</button></div>
                     <div><button class="handle-btn" mat-button>Reporter</button></div>
-                    <div><button class="handle-btn" mat-button>Annuler</button></div>
+                    <div><button class="handle-btn"  mat-button  >Annuler</button></div>
                 </th>
             </tr>
         </tbody>
@@ -34,3 +34,5 @@
 
 
 <mat-card class="card-bar" color="primary">{{patient.name[0].family}}</mat-card>
+
+<!-- (click)="test()" -->
