@@ -18,7 +18,7 @@ export class AppComponent {
   value: any = {};
   toggle = true;
   status = 'enable';
-  com: any = {};
+  comMed: any = {};
   appointment: any = {};
 
   constructor(private http: HttpClient, public matDialog: MatDialog) {
@@ -53,16 +53,18 @@ export class AppComponent {
   }
 
   getCommunication() {
-    return this.http.get(this.apiURL + '/communication').forEach((com) => {
-      this.com=com;
-      // console.log('debut')
-      // console.log(com)
-      // for (let i in com) {
-      //   if(com[i].subject.reference){
-      //     console.log('ta mere la pute')
-      //       this.com=com
-      //   }
-      // }
+    return this.http.get(this.apiURL + '/communication').forEach((comMed) => {
+      for (let i in comMed) {
+        if(comMed[i].recipient[0].reference=="Practitioner/613f51d8a5b46400122cf511"){
+          let test = comMed[i];
+          console.log(test)
+          this.comMed = test;
+          console.log(this.comMed)
+          console.log('ta mere la pute')
+        }else{
+          console.log('error')
+        }
+      }
       // for (let i in com) {
       //   console.log('for')
       //   console.log(com)

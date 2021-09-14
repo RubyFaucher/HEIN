@@ -39,12 +39,12 @@
     <tbody>
         <tr>
             <th>
-                <mat-card class="card-bar-patient" *ngFor="let communication of com" color="primary">{{communication.payload[0].contentString}}</mat-card>
+                <mat-card class="card-bar-patient" *ngFor="let communication of comMed" color="primary">{{communication.payload[0].contentString}}</mat-card>
                 <input class="champ" (keyup)="onKey($event)" onfocus="this.value=''"/>
                 <button class="handle-btn" mat-button (click)="postCommunication(value)">Confirmer</button>
             </th>
             <th>
-                <mat-card class="card-bar-medecin" *ngFor="let communication of com" color="primary">{{communication.payload[0].contentString}}</mat-card>
+                <mat-card class="card-bar-medecin" *ngFor="let communication of comMed" color="primary">{{communication.payload[0].contentString}}</mat-card>
             </th>
         </tr>
     </tbody>
