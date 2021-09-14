@@ -1,4 +1,5 @@
 <mat-toolbar>
+  <<<<<<< HEAD
   <img class="logo" src="assets/logo.png" />
   <span class="example-spacer"></span>
   <div (click)="openModal()" class="user-profile">
@@ -51,7 +52,33 @@
     </tbody>
   </table>
 </div>
-
-<mat-card class="card-bar" color="primary">{{
-  patient.name[0].family
-}}</mat-card>
+<table class="table table-unbordered chat">
+  <tbody>
+    <tr>
+      <th>
+        <mat-card
+          class="card-bar-patient"
+          *ngFor="let communication of com"
+          color="primary"
+          >{{ communication.payload[0].contentString }}</mat-card
+        >
+        <input class="champ" (keyup)="onKey($event)" onfocus="this.value=''" />
+        <button
+          class="handle-btn"
+          mat-button
+          (click)="postCommunication(value)"
+        >
+          Confirmer
+        </button>
+      </th>
+      <th>
+        <mat-card
+          class="card-bar-medecin"
+          *ngFor="let communication of com"
+          color="primary"
+          >{{ communication.payload[0].contentString }}</mat-card
+        >
+      </th>
+    </tr>
+  </tbody>
+</table>

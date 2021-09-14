@@ -23,10 +23,21 @@ mat-toolbar{
   margin-right: 10px;;
 }
 
-.card-bar{
+.card-bar-patient{
     background: linear-gradient(to right, #ff0065, #ff4f63,#ffb58a);
-    margin-top: 50px;
+    border-radius: 20px 20px 20px 0px;
+    margin-top: 10px;
 }
+
+.card-bar-medecin{
+    background: linear-gradient(to left, #ff0065, #ff4f63,#ffb58a);
+    border-radius: 20px 20px 0px 20px;
+    margin-top: 10px;
+}
+/* 
+.card-bar-hidden{
+    visibility: hidden
+} */
 
 .handle-btn{
     background-color: #ff4f63;
@@ -74,3 +85,22 @@ mat-toolbar{
     display: block;
     mix-blend-mode: screen;
 }
+
+.red{
+    background: #ffb58a;
+    color: white;
+    margin-top: 20px;
+    margin-left: 100px;
+    border-radius: 0px;
+    width:190px;
+  }
+
+  .chat{
+    width: 50%;
+  }
+
+  .champ{
+      margin-top: 10px;
+      height: 25px;
+      width: 350px;
+  }
