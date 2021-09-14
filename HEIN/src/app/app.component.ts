@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
+import { ReportModalComponent } from './reportModal/reportModal.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'HEIN';
@@ -31,14 +32,14 @@ export class AppComponent {
   getPatient() {
     return this.http
       .get(this.apiURL + '/patient/613f4788a5b46400122cf50e')
-      .forEach((patient) => {
+      .forEach(patient => {
         this.patient = patient;
       });
   }
   getPractitionner() {
     return this.http
       .get(this.apiURL + '/practitioner/613f51d8a5b46400122cf511')
-      .forEach((doctor) => {
+      .forEach(doctor => {
         this.doctor = doctor;
       });
   }
@@ -50,6 +51,14 @@ export class AppComponent {
     dialogConfig.width = '600px';
     dialogConfig.data = this.patient;
     const modalDialog = this.matDialog.open(ModalComponent, dialogConfig);
+  }
+  openReportModal() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.id = 'reportModal-component';
+    dialogConfig.height = '350px';
+    dialogConfig.width = '600px';
+    dialogConfig.data = this.appointment;
+    const modalDialog = this.matDialog.open(ReportModalComponent, dialogConfig);
   }
 
   getCommunication() {
@@ -65,6 +74,7 @@ export class AppComponent {
           console.log('error')
         }
       }
+
       // for (let i in com) {
       //   console.log('for')
       //   console.log(com)
@@ -90,25 +100,25 @@ export class AppComponent {
           resourceType: 'Communication',
           text: {
             status: 'generated',
-            div: '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>',
+            div: '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>'
           },
           subject: {
-            reference: 'Patient/613f4788a5b46400122cf50e',
+            reference: 'Patient/613f4788a5b46400122cf50e'
           },
           recipient: [
             {
-              reference: 'Practitioner/613f51d8a5b46400122cf511',
-            },
+              reference: 'Practitioner/613f51d8a5b46400122cf511'
+            }
           ],
           payload: [
             {
-              contentString: YourTextData,
-            },
-          ],
+              contentString: YourTextData
+            }
+          ]
         },
         { headers: { 'Content-Type': 'application/json' } }
       )
-      .subscribe((data) => {
+      .subscribe(data => {
         console.log(data);
       });
   }
@@ -118,24 +128,22 @@ export class AppComponent {
   }
 
   getAppointment() {
-    return this.http
-      .get(this.apiURL + '/appointment')
-      .forEach((appointment) => {
-        for (let i in appointment) {
-          if (appointment[i].participant[0].actor.display == 'Justin Mazoyer') {
-            let test = appointment[i];
-            this.appointment = test;
-          } else {
-            console.log('error');
-          }
+    return this.http.get(this.apiURL + '/appointment').forEach(appointment => {
+      for (let i in appointment) {
+        if (appointment[i].participant[0].actor.display == 'Justin Mazoyer') {
+          let test = appointment[i];
+          this.appointment = test;
+        } else {
+          console.log('error');
         }
-      });
+      }
+    });
   }
 
   delAppointment(id) {
     return this.http
       .delete(this.apiURL + '/appointment/' + id)
-      .forEach((appointment) => {
+      .forEach(appointment => {
         console.log(appointment);
       });
   }

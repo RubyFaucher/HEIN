@@ -1,7 +1,14 @@
-  <h1 class='modal-title'>{{patient.name[0].family}} {{patient.name[0].given[0]}}</h1>
-  Vos informations:
-  <ul><li>Nom: {{patient.name[0].family}}</li>
-    <li *ngFor='let firstname of patient.name[0].given'>Prénom(s): {{firstname}}</li>
-    <li>Genre: {{patient.gender}}</li></ul>
-    <div class="close-btn"><button class='mat-btn'mat-button [mat-dialog-close] >Fermer</button></div>
-
+<h1 class="modal-title">
+  {{ patient.name[0].family }} {{ patient.name[0].given[0] }}
+</h1>
+Vos informations:
+<ul>
+  <li>Nom: {{ patient.name[0].family }}</li>
+  <li *ngFor="let firstname of patient.name[0].given">
+    Prénom(s): {{ firstname }}
+  </li>
+  <li>Genre: {{ patient.gender }}</li>
+</ul>
+<div class="close-btn">
+  <button class="mat-btn" mat-button [mat-dialog-close]>Fermer</button>
+</div>

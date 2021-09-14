@@ -1,0 +1,16 @@
+<h1 class="modal-title">Veuillez choisir une nouvelle date pour votre RDV</h1>
+<!-- <div class="datepicker">
+  <input type="date" class="input" matInput [(ngModel)]="appointmentDate" />
+</div> -->
+<div class="wrap-input datepicker">
+  <input class="input" type="date" matInput [(ngModel)]="appointmentDate" />
+  <span class="focus-input"></span>
+</div>
+<div class="close-btn">
+  <button class="mat-btn" mat-button (click)="dialog.closeAll()">
+    Annuler
+  </button>
+  <button class="mat-btn" mat-button (click)="submit(appointmentDate)">
+    Valider
+  </button>
+</div>
