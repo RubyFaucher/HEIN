@@ -1,5 +1,4 @@
 <mat-toolbar>
-  <<<<<<< HEAD
   <img class="logo" src="assets/logo.png" />
   <span class="example-spacer"></span>
   <div (click)="openModal()" class="user-profile">
@@ -30,7 +29,7 @@
         </th>
         <th>
           <div>
-            <button class="handle-btn" mat-button (click)="popupConfirm()">
+            <button class="handle-btn" mat-button (click)="popupConfirm()" [ngClass]="{'handle-btn' : toggle, 'red': !toggle}">
               Confirmer le RDV
             </button>
           </div>
@@ -60,7 +59,7 @@
       <th>
         <mat-card
           class="card-bar-patient"
-          *ngFor="let communication of com"
+          *ngFor="let communication of comMed"
           color="primary"
           >{{ communication.payload[0].contentString }}</mat-card
         >
@@ -76,7 +75,7 @@
       <th>
         <mat-card
           class="card-bar-medecin"
-          *ngFor="let communication of com"
+          *ngFor="let communication of comMed"
           color="primary"
           >{{ communication.payload[0].contentString }}</mat-card
         >

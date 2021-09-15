@@ -63,17 +63,18 @@ export class AppComponent {
 
   getCommunication() {
     return this.http.get(this.apiURL + '/communication').forEach((comMed) => {
-      for (let i in comMed) {
-        if(comMed[i].recipient[0].reference=="Practitioner/613f51d8a5b46400122cf511"){
-          let test = comMed[i];
-          console.log(test)
-          this.comMed = test;
-          console.log(this.comMed)
-          console.log('ta mere la pute')
-        }else{
-          console.log('error')
-        }
-      }
+      this.comMed=comMed;
+      // for (let i in comMed) {
+      //   if(comMed[i].recipient[0].reference=="Practitioner/613f51d8a5b46400122cf511"){
+      //     let test = comMed[i];
+      //     console.log(test)
+      //     this.comMed = test;
+      //     console.log(this.comMed)
+      //     console.log('ta mere la pute')
+      //   }else{
+      //     console.log('error')
+      //   }
+      // }
 
       // for (let i in com) {
       //   console.log('for')
@@ -93,6 +94,7 @@ export class AppComponent {
   }
 
   postCommunication(YourTextData) {
+    window.location.reload()
     return this.http
       .post(
         this.apiURL + '/communication',
@@ -102,9 +104,7 @@ export class AppComponent {
             status: 'generated',
             div: '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>'
           },
-          subject: {
-            reference: 'Patient/613f4788a5b46400122cf50e'
-          },
+          
           recipient: [
             {
               reference: 'Practitioner/613f51d8a5b46400122cf511'
