@@ -21,6 +21,7 @@ export class AppComponent {
   toggle = true;
   status = 'enable';
   com: any = {};
+  confirmedMessage: string = 'Confirmer le RDV';
   message_patient: any = {};
   message_medecin: any = {};
 
@@ -158,6 +159,9 @@ export class AppComponent {
       });
   }
   popupConfirm() {
+    this.confirmedMessage = this.toggle
+      ? 'Annuler la confirmation du RDV'
+      : 'Confirmer le RDV';
     let message = this.toggle
       ? 'Votre rendez-vous a bien été confirmé'
       : "Votre rendez-vous n'est plus confirmé";

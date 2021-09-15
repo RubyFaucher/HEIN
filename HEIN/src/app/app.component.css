@@ -1,106 +1,103 @@
 .example-spacer {
   flex: 1 1 auto;
 }
-mat-toolbar{
-  background: linear-gradient(to right, #ffb58a, #ff4f63,#ff0065);
+mat-toolbar {
+  background: linear-gradient(to right, #ffb58a, #ff4f63, #ff0065);
 }
-.logo{
-  width:100px;
+.logo {
+  width: 100px;
   height: 100px;
 }
-.user-profile{
-  color:#ffffff;
+.user-profile {
+  color: #ffffff;
   text-align: center;
-
-
 }
 .user-profile:hover {
   cursor: pointer;
-  color:#ffb58a;
+  color: #ffb58a;
   text-align: center;
 }
-.user-name{
-  margin-right: 10px;;
+.user-name {
+  margin-right: 10px;
 }
 
-.card-bar-patient{
-    background: linear-gradient(to right, #ff0065, #ff4f63,#ffb58a);
-    border-radius: 20px 20px 20px 0px;
-    margin-top: 10px;
+.card-bar-patient {
+  background: linear-gradient(to right, #ff0065, #ff4f63, #ffb58a);
+  border-radius: 20px 20px 20px 0px;
+  margin-top: 10px;
 }
 
-.card-bar-medecin{
-    background: linear-gradient(to left, #ff0065, #ff4f63,#ffb58a);
-    border-radius: 20px 20px 0px 20px;
-    margin-top: 10px;
+.card-bar-medecin {
+  background: linear-gradient(to left, #ff0065, #ff4f63, #ffb58a);
+  border-radius: 20px 20px 0px 20px;
+  margin-top: 10px;
 }
-/* 
+/*
 .card-bar-hidden{
     visibility: hidden
 } */
 
-.handle-btn{
-    background-color: #ff4f63;
-    color: white;
-    margin-top: 20px;
-    margin-left: 100px;
-    border-radius: 0px;
-    width:190px;
+.handle-btn {
+  background-color: #ff4f63;
+  color: white;
+  margin-top: 20px;
+  margin-left: 100px;
+  border-radius: 0px;
+  width: 250px;
 }
 
-.text{
-    margin-left: 10%;
-    margin-top:10px;
-    font-family: roboto;
-    color: #434343;
+.text {
+  margin-left: 10%;
+  margin-top: 10px;
+  font-family: roboto;
+  color: #434343;
 }
 
 /* .docName{
 
 } */
 
-.name{
-    text-transform: uppercase;
+.name {
+  text-transform: uppercase;
 }
 
 .bienvenue {
-    font-size:50px;
-    display: inline-block;
-    background: white;
-    color: black;
-    position: relative;
-    margin-left: 30%;
-
-  }
-
-.bienvenue::before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: -webkit-linear-gradient(right, #ff0065, #ff4f63,#ffb58a);
-    background: linear-gradient(to left, #ff0065, #ff4f63,#ffb58a);
-    content: '';
-    display: block;
-    mix-blend-mode: screen;
+  font-size: 50px;
+  display: inline-block;
+  background: white;
+  color: black;
+  position: relative;
+  margin-left: 30%;
 }
 
-.red{
-    background: #ffb58a;
-    color: white;
-    margin-top: 20px;
-    margin-left: 100px;
-    border-radius: 0px;
-    width:190px;
-  }
+.bienvenue::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: -webkit-linear-gradient(right, #ff0065, #ff4f63, #ffb58a);
+  background: linear-gradient(to left, #ff0065, #ff4f63, #ffb58a);
+  content: '';
+  display: block;
+  mix-blend-mode: screen;
+}
 
-  .chat{
-    width: 50%;
-  }
+.red {
+  background: #ffb58a;
+  color: white;
+  margin-top: 20px;
+  margin-left: 100px;
+  border-radius: 0px;
+  width: 250px;
+}
 
-  .champ{
-      margin-top: 10px;
-      height: 25px;
-      width: 350px;
-  }
+.chat {
+  width: 50%;
+}
+
+.champ {
+  margin-top: 10px;
+  height: 25px;
+  width: 350px;
+}

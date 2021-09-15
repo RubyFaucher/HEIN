@@ -34,7 +34,7 @@
               (click)="popupConfirm()"
               [ngClass]="{ 'handle-btn': toggle, red: !toggle }"
             >
-              Confirmer le RDV
+              {{ confirmedMessage }}
             </button>
           </div>
           <div>
@@ -62,11 +62,9 @@
       <th>
         <mat-card
           class="card-bar-patient"
-          *ngfor ="let messagepatient of message_patient"
-
-
+          *ngfor="let messagepatient of message_patient"
           color="primary"
-          >{{ messagepatient.payload[0].contentString}}</mat-card
+          >{{ messagepatient.payload[0].contentString }}</mat-card
         >
         <input class="champ" (keyup)="onKey($event)" onfocus="this.value=''" />
         <button
@@ -80,8 +78,7 @@
       <th>
         <mat-card
           class="card-bar-medecin"
-          *ngfor ="let messagemedecin of message_medecin"
-
+          *ngfor="let messagemedecin of message_medecin"
           color="primary"
           >{{ messagemedecin.payload[0].contentString }}</mat-card
         >
