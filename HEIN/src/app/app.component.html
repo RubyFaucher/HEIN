@@ -54,7 +54,9 @@
     </div>
   </mat-tab>
 </mat-tab-group>
-<hr noshade width="300" size="3" />
+<hr noshade width="900" size="3" style="color: lightgray" />
+<h2 class="chat-title">MESSAGERIE</h2>
+
 <div class="messages">
   <div class="sent-messages">
     <table class="table table-unbordered chat">
@@ -67,14 +69,21 @@
           <th>
             <mat-card class="card-bar-medecin" *ngFor="let communication of comMed" color="primary">{{
               communication.payload[0].contentString }}</mat-card>
+
           </th>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="send-bar">
-    <input class="champ" (keyup)="onKey($event)" onfocus="this.value=''" />
-
+    <div class="wrap-input datepicker">
+      <input
+        class="input champ"
+        (keyup)="onKey($event)"
+        onfocus="this.value=''"
+      />
+      <span class="focus-input"></span>
+    </div>
     <button class="mat-btn" mat-button (click)="postCommunication(value)">
       Envoyer
     </button>
