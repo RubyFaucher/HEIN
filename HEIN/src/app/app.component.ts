@@ -79,16 +79,12 @@ export class AppComponent {
         ) {
           let messageMed = com[i];
           this.comMed.push(messageMed);
-
-
         }
         if (
           com[i].recipient[0].reference == 'Patient/613f4788a5b46400122cf50e'
         ) {
-
           let messagePat = com[i];
           this.comPat.push(messagePat);
-
         }
       }
     });
