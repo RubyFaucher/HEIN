@@ -28,6 +28,10 @@ export class AppComponent {
   comMed = [];
   comPat = [];
   appointment: any = {};
+  retard=[];
+  valuesRetard:string = "";
+  tableRetard:any={};
+
 
   constructor(
     private http: HttpClient,
@@ -88,6 +92,19 @@ export class AppComponent {
         ) {
           let messagePat = com[i];
           this.comPat.push(messagePat);
+          console.log()
+        }
+        if (
+          com[i].recipient[0].reference == 'Notification retard'
+        ) {
+          let retardMed = com[i];
+          this.retard.push(retardMed);
+          for(let communication of this.retard){
+            this.valuesRetard= communication.payload[0].contentString
+            this.tableRetard=this.valuesRetard.split("-")
+            
+
+          }
         }
       }
     });
@@ -132,21 +149,23 @@ export class AppComponent {
       for (let i in appointment) {
         if (appointment[i].participant[0].actor.display == 'Justin Mazoyer') {
           let test = appointment[i];
-          this.appointment=test;
           this.listAppointment.push(test);
          
         } else {
           console.log('error');
         }
       }
-      console.log(this.listAppointment)
+      this.appointment=this.listAppointment[0];
     });
+  }
+
+  selectAppointment(index){
+    this.appointment=this.listAppointment[index]
+
   }
 
   cancelAppointment(id) {
     this.appointment.status = 'cancelled';
-    console.log(this.appointment);
-
     return this.http
       .put(this.apiURL + '/appointment/' + id, this.appointment, {
         headers: { 'Content-Type': 'application/json' }

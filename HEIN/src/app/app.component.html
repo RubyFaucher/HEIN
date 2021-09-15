@@ -9,8 +9,8 @@
 <h1 class="bienvenue">
   Bienvenue {{ appointment?.participant[0].actor.display }}
 </h1>
-<mat-tab-group animationDuration="2000ms" backgroundColor="primary">
-  <mat-tab label="Rendez-vous n° {{i + 1}}" *ngFor="let appointment of listAppointment, let i = index">
+<mat-tab-group (selectedTabChange)="selectAppointment($event.index)" animationDuration="2000ms" backgroundColor="primary">
+  <mat-tab  label="Rendez-vous n° {{i + 1}}" *ngFor="let appointment of listAppointment, let i = index">
     <div class="text">
       <table className="table table-unbordered">
         <tbody>
@@ -23,8 +23,8 @@
                 <p>Date du rdv : {{ appointment?.requestedPeriod[0].start }}</p>
                 <p>Durée du rdv : {{ appointment?.minutesDuration }} min</p>
                 <p>Numero du rdv : {{ appointment?.id }}</p>
-                <p>Retard de X minutes</p>
-
+                <p style="color:red" *ngIf="tableRetard[1]==appointment?.id">Retard de{{tableRetard[0]}} minutes</p>
+                <!-- <p >{{tableRetard[1]}}</p> -->
               </div>
               <div *ngIf="appointment.status == 'cancelled'">
                 <h3 class="pasRdv">Vous n'avez pas de RDV</h3>
@@ -43,7 +43,7 @@
                 </button>
               </div>
               <div>
-                <button class="handle-btn" mat-button (click)="cancelAppointment(appointment.id)">
+                <button class="handle-btn" mat-button (click)="cancelAppointment(appointment?.id)">
                   Annuler le RDV
                 </button>
               </div>
