@@ -34,6 +34,7 @@ mat-toolbar {
 .card-bar-medecin {
   background: linear-gradient(to right, #8000ff, #4f8dff, #8ac9ff);
   border-radius: 20px 20px 20px 0px;
+
   font-weight: normal;
   margin-top: 10px;
   height: 10px;
