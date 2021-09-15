@@ -1,5 +1,4 @@
 <mat-toolbar>
-  <<<<<<< HEAD
   <img class="logo" src="assets/logo.png" />
   <span class="example-spacer"></span>
   <div (click)="openModal()" class="user-profile">
@@ -58,9 +57,9 @@
       <th>
         <mat-card
           class="card-bar-patient"
-          *ngFor="let communication of com"
+          *ngfor ="let messagepatient of message_patient"
           color="primary"
-          >{{ communication.payload[0].contentString }}</mat-card
+          >{{ messagepatient.payload[0].contentString}}</mat-card
         >
         <input class="champ" (keyup)="onKey($event)" onfocus="this.value=''" />
         <button
@@ -74,9 +73,9 @@
       <th>
         <mat-card
           class="card-bar-medecin"
-          *ngFor="let communication of com"
+          *ngfor ="let messagemedecin of message_medecin"
           color="primary"
-          >{{ communication.payload[0].contentString }}</mat-card
+          >{{ messagemedecin.payload[0].contentString }}</mat-card
         >
       </th>
     </tr>

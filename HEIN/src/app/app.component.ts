@@ -20,6 +20,8 @@ export class AppComponent {
   toggle = true;
   status = 'enable';
   com: any = {};
+  message_patient: any = {};
+  message_medecin: any = {};
   appointment: any = {};
 
   constructor(private http: HttpClient, public matDialog: MatDialog) {
@@ -64,28 +66,18 @@ export class AppComponent {
   getCommunication() {
     return this.http.get(this.apiURL + '/communication').forEach(com => {
       this.com = com;
-      // console.log('debut')
-      // console.log(com)
-      // for (let i in com) {
-      //   if(com[i].subject.reference){
-      //     console.log('ta mere la pute')
-      //       this.com=com
-      //   }
-      // }
-      // for (let i in com) {
-      //   console.log('for')
-      //   console.log(com)
-      //   if (com[i].subject.reference == 'Patient/613f4788a5b46400122cf50e') {
-      //     console.log('if')
-      //     console.log(com)
-      //     let test = com[i];
-      //     console.log('test')
-      //     console.log(test)
-      //     this.com = test;
-      //     console.log('fin')
-      //     console.log(com)
-      //   }
-      // }
+
+      for (let i in com) {
+        if (com[i].recipient[0].reference == 'Practitioner/613f51d8a5b46400122cf511') {
+          let messagemed = com[i];
+          this.message_medecin = messagemed;
+          console.log(this.com)
+        }
+        if (com[i].recipient[0].reference == 'Patient/613f4788a5b46400122cf50e') {
+          let message_patient = com[i];
+          this.message_patient = message_patient;
+        }
+      }
     });
   }
 
@@ -99,12 +91,14 @@ export class AppComponent {
             status: 'generated',
             div: '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>'
           },
-          subject: {
-            reference: 'Patient/613f4788a5b46400122cf50e'
-          },
+          // subject: [ 
+          //   {
+          //   reference: 'Patient/613f4788a5b46400122cf50e'
+          // }
+          // ],
           recipient: [
             {
-              reference: 'Practitioner/613f51d8a5b46400122cf511'
+              reference: 'Patient/613f4788a5b46400122cf50e'
             }
           ],
           payload: [
