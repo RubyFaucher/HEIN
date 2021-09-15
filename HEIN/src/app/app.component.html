@@ -29,7 +29,7 @@
                 <p>Date du rdv : {{ appointment?.requestedPeriod[0].start }}</p>
                 <p>Durée du rdv : {{ appointment?.minutesDuration }} min</p>
                 <p>Numero du rdv : {{ appointment?.id }}</p>
-                <p style="color:red" *ngIf="tableRetard[1]==appointment?.id">Retard de{{tableRetard[0]}} minutes</p>
+                <p style="color:red" *ngIf="tableRetard[1]==appointment?.id">Retard de {{tableRetard[0]}} minutes</p>
                 <!-- <p >{{tableRetard[1]}}</p> -->
 
               </div>
