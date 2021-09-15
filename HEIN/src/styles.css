@@ -7,6 +7,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  overflow: hidden;
 }
 mat-dialog-container {
   border: 4px solid #ff4f63;
