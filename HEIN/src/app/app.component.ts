@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalComponent } from './modal/modal.component';
 import { ReportModalComponent } from './reportModal/reportModal.component';
 
@@ -22,11 +23,14 @@ export class AppComponent {
   comMed: any = {};
   appointment: any = {};
 
-  constructor(private http: HttpClient, public matDialog: MatDialog) {
+  constructor(
+    private http: HttpClient,
+    public matDialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {
     this.getPatient();
     this.getPractitionner();
     this.getAppointment();
-    this.delAppointment(this.id);
     this.getCommunication();
   }
   getPatient() {
@@ -45,11 +49,13 @@ export class AppComponent {
   }
   openModal() {
     const dialogConfig = new MatDialogConfig();
-    //dialogConfig.disableClose = true;
     dialogConfig.id = 'modal-component';
     dialogConfig.height = '350px';
     dialogConfig.width = '600px';
-    dialogConfig.data = this.patient;
+    dialogConfig.data = {
+      patient: this.patient,
+      appointment: this.appointment
+    };
     const modalDialog = this.matDialog.open(ModalComponent, dialogConfig);
   }
   openReportModal() {
@@ -62,8 +68,8 @@ export class AppComponent {
   }
 
   getCommunication() {
-    return this.http.get(this.apiURL + '/communication').forEach((comMed) => {
-      this.comMed=comMed;
+    return this.http.get(this.apiURL + '/communication').forEach(comMed => {
+      this.comMed = comMed;
       // for (let i in comMed) {
       //   if(comMed[i].recipient[0].reference=="Practitioner/613f51d8a5b46400122cf511"){
       //     let test = comMed[i];
@@ -94,7 +100,7 @@ export class AppComponent {
   }
 
   postCommunication(YourTextData) {
-    window.location.reload()
+    window.location.reload();
     return this.http
       .post(
         this.apiURL + '/communication',
@@ -104,7 +110,7 @@ export class AppComponent {
             status: 'generated',
             div: '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>'
           },
-          
+
           recipient: [
             {
               reference: 'Practitioner/613f51d8a5b46400122cf511'
@@ -141,6 +147,11 @@ export class AppComponent {
   }
 
   delAppointment(id) {
+    this.snackBar.open('Votre rendez-vous a bien été annulé', 'X', {
+      panelClass: 'notif',
+      verticalPosition: 'top',
+      duration: 2000
+    });
     return this.http
       .delete(this.apiURL + '/appointment/' + id)
       .forEach(appointment => {
@@ -148,7 +159,14 @@ export class AppComponent {
       });
   }
   popupConfirm() {
-    alert('Votre RDV est confirmé');
+    let message = this.toggle
+      ? 'Votre rendez-vous a bien été confirmé'
+      : "Votre rendez-vous n'est plus confirmé";
+    this.snackBar.open(message, 'X', {
+      panelClass: 'notif',
+      verticalPosition: 'top',
+      duration: 2000
+    });
     this.toggle = !this.toggle;
     this.status = this.toggle ? 'enable' : 'disable';
   }

@@ -9,6 +9,14 @@ Vos informations:
   </li>
   <li>Genre: {{ patient.gender }}</li>
 </ul>
+Votre rendez-vous:
+<ul>
+  <li>Commentaires: {{ appointment.comment }}</li>
+  <li>Description: {{ appointment.description }}</li>
+
+  <li>Durée: {{ appointment.minutesDuration }} minutes</li>
+  <li>Status: {{ appointment.status }}</li>
+</ul>
 <div class="close-btn">
   <button class="mat-btn" mat-button [mat-dialog-close]>Fermer</button>
 </div>

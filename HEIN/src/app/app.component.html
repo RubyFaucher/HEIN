@@ -14,7 +14,6 @@
 <div class="text">
   <table className="table table-unbordered">
     <tbody>
-
       <tr>
         <th>
           <p class="docName">
@@ -29,7 +28,12 @@
         </th>
         <th>
           <div>
-            <button class="handle-btn" mat-button (click)="popupConfirm()" [ngClass]="{'handle-btn' : toggle, 'red': !toggle}">
+            <button
+              class="handle-btn"
+              mat-button
+              (click)="popupConfirm()"
+              [ngClass]="{ 'handle-btn': toggle, red: !toggle }"
+            >
               Confirmer le RDV
             </button>
           </div>
@@ -49,7 +53,6 @@
           </div>
         </th>
       </tr>
-
     </tbody>
   </table>
 </div>
