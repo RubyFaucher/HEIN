@@ -24,7 +24,7 @@ export class AppComponent {
   confirmedMessage: string = 'Confirmer le RDV';
   message_patient: any = {};
   message_medecin: any = {};
-
+  listAppointment=[];
   comMed = [];
   comPat = [];
   appointment: any = {};
@@ -94,7 +94,7 @@ export class AppComponent {
   }
 
   postCommunication(YourTextData) {
-    window.location.reload();
+    window.setTimeout(function(){location.reload()},500)
     return this.http
       .post(
         this.apiURL + '/communication',
@@ -132,11 +132,14 @@ export class AppComponent {
       for (let i in appointment) {
         if (appointment[i].participant[0].actor.display == 'Justin Mazoyer') {
           let test = appointment[i];
-          this.appointment = test;
+          this.appointment=test;
+          this.listAppointment.push(test);
+         
         } else {
           console.log('error');
         }
       }
+      console.log(this.listAppointment)
     });
   }
 

@@ -2,65 +2,58 @@
   <img class="logo" src="assets/logo.png" />
   <span class="example-spacer"></span>
   <div (click)="openModal()" class="user-profile">
-    <span class="user-name"
-      >{{ patient?.name[0]?.family }} {{ patient?.name[0]?.given[0] }}</span
-    >
+    <span class="user-name">{{ patient?.name[0]?.family }} {{ patient?.name[0]?.given[0] }}</span>
     <mat-icon (click)="openModal()" class="user-icon">account_circle</mat-icon>
   </div>
 </mat-toolbar>
 <h1 class="bienvenue">
   Bienvenue {{ appointment?.participant[0].actor.display }}
 </h1>
-<div class="text">
-  <table className="table table-unbordered">
-    <tbody>
-      <tr>
-        <th>
-          <p class="docName">
-            <b
-              >Docteur <span class="name">{{ doctor.name[0].family }}</span></b
-            >
-          </p>
-          <div *ngIf="appointment.status != 'cancelled'">
-            <p>Date du rdv : {{ appointment?.requestedPeriod[0].start }}</p>
-            <p>Durée du rdv : {{ appointment?.minutesDuration }} min</p>
-            <p>Numero du rdv : {{ appointment?.id }}</p>
-            <p>Retard de X minutes</p>
-          </div>
-          <div *ngIf="appointment.status == 'cancelled'">
-            <h3 class="pasRdv">Vous n'avez pas de RDV</h3>
-          </div>
-        </th>
-        <th>
-          <div>
-            <button
-              class="handle-btn"
-              mat-button
-              (click)="popupConfirm()"
-              [ngClass]="{ 'handle-btn': toggle, red: !toggle }"
-            >
-              {{ confirmedMessage }}
-            </button>
-          </div>
-          <div>
-            <button class="handle-btn" mat-button (click)="openReportModal()">
-              Reporter le RDV
-            </button>
-          </div>
-          <div>
-            <button
-              class="handle-btn"
-              mat-button
-              (click)="cancelAppointment(appointment.id)"
-            >
-              Annuler le RDV
-            </button>
-          </div>
-        </th>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<mat-tab-group animationDuration="2000ms" backgroundColor="primary">
+  <mat-tab label="Rendez-vous n° {{i + 1}}" *ngFor="let appointment of listAppointment, let i = index">
+    <div class="text">
+      <table className="table table-unbordered">
+        <tbody>
+          <tr>
+            <th>
+              <p class="docName">
+                <b>Docteur <span class="name">{{ doctor.name[0].family }}</span></b>
+              </p>
+              <div *ngIf="appointment.status != 'cancelled'">
+                <p>Date du rdv : {{ appointment?.requestedPeriod[0].start }}</p>
+                <p>Durée du rdv : {{ appointment?.minutesDuration }} min</p>
+                <p>Numero du rdv : {{ appointment?.id }}</p>
+                <p>Retard de X minutes</p>
+
+              </div>
+              <div *ngIf="appointment.status == 'cancelled'">
+                <h3 class="pasRdv">Vous n'avez pas de RDV</h3>
+              </div>
+            </th>
+            <th>
+              <div>
+                <button class="handle-btn" mat-button (click)="popupConfirm()"
+                  [ngClass]="{ 'handle-btn': toggle, red: !toggle }">
+                  {{ confirmedMessage }}
+                </button>
+              </div>
+              <div>
+                <button class="handle-btn" mat-button (click)="openReportModal()">
+                  Reporter le RDV
+                </button>
+              </div>
+              <div>
+                <button class="handle-btn" mat-button (click)="cancelAppointment(appointment.id)">
+                  Annuler le RDV
+                </button>
+              </div>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-tab>
+</mat-tab-group>
 <hr noshade width="300" size="3" />
 <div class="messages">
   <div class="sent-messages">
@@ -68,20 +61,12 @@
       <tbody>
         <tr>
           <th>
-            <mat-card
-              class="card-bar-patient"
-              *ngFor="let communication of comPat"
-              color="primary"
-              >{{ communication.payload[0].contentString }}</mat-card
-            >
+            <mat-card class="card-bar-patient" *ngFor="let communication of comPat" color="primary">{{
+              communication.payload[0].contentString }}</mat-card>
           </th>
           <th>
-            <mat-card
-              class="card-bar-medecin"
-              *ngFor="let communication of comMed"
-              color="primary"
-              >{{ communication.payload[0].contentString }}</mat-card
-            >
+            <mat-card class="card-bar-medecin" *ngFor="let communication of comMed" color="primary">{{
+              communication.payload[0].contentString }}</mat-card>
           </th>
         </tr>
       </tbody>
