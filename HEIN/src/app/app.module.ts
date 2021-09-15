@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ModalComponent } from './modal/modal.component';
 import { ReportModalComponent } from './reportModal/reportModal.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, ModalComponent, ReportModalComponent],
@@ -31,9 +32,9 @@ import { ReportModalComponent } from './reportModal/reportModal.component';
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
   ],
-
   providers: [AppComponent],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent, ReportModalComponent]

@@ -22,10 +22,16 @@
               >Docteur <span class="name">{{ doctor.name[0].family }}</span></b
             >
           </p>
+          <div *ngIf="appointment.status!='cancelled'">
           <p>Date du rdv : {{ appointment?.requestedPeriod[0].start }}</p>
           <p>Durée du rdv : {{ appointment?.minutesDuration }} min</p>
           <p>Numero du rdv : {{ appointment?.id }}</p>
           <p>Retard de X minutes</p>
+        </div>
+        <div *ngIf="appointment.status=='cancelled'">
+         <h3 class="pasRdv">Vous n'avez pas de RDV</h3>
+        </div>
+
         </th>
         <th>
           <div>
@@ -42,7 +48,7 @@
             <button
               class="handle-btn"
               mat-button
-              (click)="delAppointment(appointment.id)"
+              (click)="cancelAppointment(appointment.id)"
             >
               Annuler le RDV
             </button>
@@ -59,7 +65,7 @@
       <th>
         <mat-card
           class="card-bar-patient"
-          *ngFor="let communication of comMed"
+          *ngFor="let communication of comPat"
           color="primary"
           >{{ communication.payload[0].contentString }}</mat-card
         >
@@ -83,3 +89,6 @@
     </tr>
   </tbody>
 </table>
+<!-- *ngFor="let communication of com"
+
+          *ngIf="com[0].recipient[0].reference =='Practitioner/613f51d8a5b46400122cf511'" -->

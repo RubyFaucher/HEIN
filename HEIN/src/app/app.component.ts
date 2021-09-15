@@ -7,7 +7,7 @@ import { ReportModalComponent } from './reportModal/reportModal.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'HEIN';
@@ -19,27 +19,29 @@ export class AppComponent {
   value: any = {};
   toggle = true;
   status = 'enable';
-  comMed: any = {};
+  comMed=[];
+  comPat=[];
   appointment: any = {};
+  com: any = {};
+  // messageMed: any={};
 
   constructor(private http: HttpClient, public matDialog: MatDialog) {
     this.getPatient();
     this.getPractitionner();
     this.getAppointment();
-    this.delAppointment(this.id);
     this.getCommunication();
   }
   getPatient() {
     return this.http
       .get(this.apiURL + '/patient/613f4788a5b46400122cf50e')
-      .forEach(patient => {
+      .forEach((patient) => {
         this.patient = patient;
       });
   }
   getPractitionner() {
     return this.http
       .get(this.apiURL + '/practitioner/613f51d8a5b46400122cf511')
-      .forEach(doctor => {
+      .forEach((doctor) => {
         this.doctor = doctor;
       });
   }
@@ -62,39 +64,28 @@ export class AppComponent {
   }
 
   getCommunication() {
-    return this.http.get(this.apiURL + '/communication').forEach((comMed) => {
-      this.comMed=comMed;
-      // for (let i in comMed) {
-      //   if(comMed[i].recipient[0].reference=="Practitioner/613f51d8a5b46400122cf511"){
-      //     let test = comMed[i];
-      //     console.log(test)
-      //     this.comMed = test;
-      //     console.log(this.comMed)
-      //     console.log('ta mere la pute')
-      //   }else{
-      //     console.log('error')
-      //   }
-      // }
+    return this.http.get(this.apiURL + '/communication').forEach((com) => {
+      for (let i in com) {
+        if (
+          com[i].recipient[0].reference ==
+          'Practitioner/613f51d8a5b46400122cf511'
+        ) {
+          let messageMed = com[i];
+          this.comMed.push(messageMed);
 
-      // for (let i in com) {
-      //   console.log('for')
-      //   console.log(com)
-      //   if (com[i].subject.reference == 'Patient/613f4788a5b46400122cf50e') {
-      //     console.log('if')
-      //     console.log(com)
-      //     let test = com[i];
-      //     console.log('test')
-      //     console.log(test)
-      //     this.com = test;
-      //     console.log('fin')
-      //     console.log(com)
-      //   }
-      // }
+        }
+        if (
+          com[i].recipient[0].reference == 'Patient/613f4788a5b46400122cf50e'
+        ) {
+          let messagePat = com[i];
+          this.comPat.push(messagePat);
+        }
+      }
     });
   }
 
   postCommunication(YourTextData) {
-    window.location.reload()
+    window.location.reload();
     return this.http
       .post(
         this.apiURL + '/communication',
@@ -102,23 +93,23 @@ export class AppComponent {
           resourceType: 'Communication',
           text: {
             status: 'generated',
-            div: '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>'
+            div: '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>',
           },
-          
+
           recipient: [
             {
-              reference: 'Practitioner/613f51d8a5b46400122cf511'
-            }
+              reference: 'Practitioner/613f51d8a5b46400122cf511',
+            },
           ],
           payload: [
             {
-              contentString: YourTextData
-            }
-          ]
+              contentString: YourTextData,
+            },
+          ],
         },
         { headers: { 'Content-Type': 'application/json' } }
       )
-      .subscribe(data => {
+      .subscribe((data) => {
         console.log(data);
       });
   }
@@ -128,25 +119,32 @@ export class AppComponent {
   }
 
   getAppointment() {
-    return this.http.get(this.apiURL + '/appointment').forEach(appointment => {
-      for (let i in appointment) {
-        if (appointment[i].participant[0].actor.display == 'Justin Mazoyer') {
-          let test = appointment[i];
-          this.appointment = test;
-        } else {
-          console.log('error');
-        }
-      }
-    });
-  }
-
-  delAppointment(id) {
     return this.http
-      .delete(this.apiURL + '/appointment/' + id)
-      .forEach(appointment => {
-        console.log(appointment);
+      .get(this.apiURL + '/appointment')
+      .forEach((appointment) => {
+        for (let i in appointment) {
+          if (appointment[i].participant[0].actor.display == 'Justin Mazoyer') {
+            let test = appointment[i];
+            this.appointment = test;
+          } else {
+            console.log('error');
+          }
+        }
       });
   }
+
+  cancelAppointment(id) {
+    this.appointment.status = 'cancelled';
+    console.log(this.appointment);
+    return this.http
+      .put(this.apiURL + '/appointment/' + id, this.appointment, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+      .subscribe((data) => {
+        console.log('apres put', data);
+      });
+  }
+
   popupConfirm() {
     alert('Votre RDV est confirmé');
     this.toggle = !this.toggle;
