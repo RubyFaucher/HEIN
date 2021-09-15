@@ -9,14 +9,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ModalComponent } from './modal/modal.component';
 import { ReportModalComponent } from './reportModal/reportModal.component';
-import { CommonModule } from '@angular/common';
-
 @NgModule({
   declarations: [AppComponent, ModalComponent, ReportModalComponent],
   imports: [
@@ -33,7 +32,8 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    CommonModule,
+    MatSnackBarModule
+
   ],
   providers: [AppComponent],
   bootstrap: [AppComponent],

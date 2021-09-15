@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-reportModal',
@@ -15,7 +16,8 @@ export class ReportModalComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) data,
     public dialog: MatDialog,
-    private http: HttpClient
+    private http: HttpClient,
+    private snackBar: MatSnackBar
   ) {
     this.appointment = data;
   }
@@ -26,6 +28,11 @@ export class ReportModalComponent implements OnInit {
     this.appointment.requestedPeriod = [
       { start: appointmentDate, end: appointmentDate }
     ];
+    this.snackBar.open('Votre rendez-vous a bien été reporté', 'X', {
+      panelClass: 'notif',
+      verticalPosition: 'top',
+      duration: 2000
+    });
     return this.http
       .put(
         this.apiURL + '/appointment/' + this.appointment.id,

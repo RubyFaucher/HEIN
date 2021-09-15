@@ -14,7 +14,6 @@
 <div class="text">
   <table className="table table-unbordered">
     <tbody>
-
       <tr>
         <th>
           <p class="docName">
@@ -35,7 +34,12 @@
         </th>
         <th>
           <div>
-            <button class="handle-btn" mat-button (click)="popupConfirm()" [ngClass]="{'handle-btn' : toggle, 'red': !toggle}">
+            <button
+              class="handle-btn"
+              mat-button
+              (click)="popupConfirm()"
+              [ngClass]="{ 'handle-btn': toggle, red: !toggle }"
+            >
               Confirmer le RDV
             </button>
           </div>
@@ -55,7 +59,6 @@
           </div>
         </th>
       </tr>
-
     </tbody>
   </table>
 </div>
@@ -67,7 +70,7 @@
           class="card-bar-patient"
           *ngFor="let communication of comPat"
           color="primary"
-          >{{ communication.payload[0].contentString }}</mat-card
+          >{{ messagepatient.payload[0].contentString}}</mat-card
         >
         <input class="champ" (keyup)="onKey($event)" onfocus="this.value=''" />
         <button
@@ -81,7 +84,8 @@
       <th>
         <mat-card
           class="card-bar-medecin"
-          *ngFor="let communication of comMed"
+          *ngfor ="let communication of comMed"
+
           color="primary"
           >{{ communication.payload[0].contentString }}</mat-card
         >
@@ -89,6 +93,3 @@
     </tr>
   </tbody>
 </table>
-<!-- *ngFor="let communication of com"
-
-          *ngIf="com[0].recipient[0].reference =='Practitioner/613f51d8a5b46400122cf511'" -->

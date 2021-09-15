@@ -3,6 +3,7 @@
   color: #434343;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 .modal-title {
   text-align: center;
@@ -49,7 +50,6 @@ input:focus {
   font-size: 18px;
 
   display: block;
-  width: 100%;
   background: transparent;
   height: 50px;
   padding: 0 20px 0 38px;
@@ -88,4 +88,7 @@ input:focus {
   -ms-transform: scale(1);
   -o-transform: scale(1);
   transform: scale(1);
+}
+.notif {
+  background-color: aquamarine;
 }

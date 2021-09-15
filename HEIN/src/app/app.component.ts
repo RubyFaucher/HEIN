@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalComponent } from './modal/modal.component';
 import { ReportModalComponent } from './reportModal/reportModal.component';
 
@@ -21,11 +22,16 @@ export class AppComponent {
   status = 'enable';
   comMed=[];
   comPat=[];
+
   appointment: any = {};
   com: any = {};
   // messageMed: any={};
 
-  constructor(private http: HttpClient, public matDialog: MatDialog) {
+  constructor(
+    private http: HttpClient,
+    public matDialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {
     this.getPatient();
     this.getPractitionner();
     this.getAppointment();
@@ -47,11 +53,13 @@ export class AppComponent {
   }
   openModal() {
     const dialogConfig = new MatDialogConfig();
-    //dialogConfig.disableClose = true;
     dialogConfig.id = 'modal-component';
     dialogConfig.height = '350px';
     dialogConfig.width = '600px';
-    dialogConfig.data = this.patient;
+    dialogConfig.data = {
+      patient: this.patient,
+      appointment: this.appointment
+    };
     const modalDialog = this.matDialog.open(ModalComponent, dialogConfig);
   }
   openReportModal() {
@@ -64,6 +72,7 @@ export class AppComponent {
   }
 
   getCommunication() {
+
     return this.http.get(this.apiURL + '/communication').forEach((com) => {
       for (let i in com) {
         if (
@@ -73,12 +82,15 @@ export class AppComponent {
           let messageMed = com[i];
           this.comMed.push(messageMed);
 
+
         }
         if (
           com[i].recipient[0].reference == 'Patient/613f4788a5b46400122cf50e'
         ) {
+
           let messagePat = com[i];
           this.comPat.push(messagePat);
+
         }
       }
     });
@@ -99,7 +111,7 @@ export class AppComponent {
           recipient: [
             {
               reference: 'Practitioner/613f51d8a5b46400122cf511',
-            },
+
           ],
           payload: [
             {
@@ -136,6 +148,7 @@ export class AppComponent {
   cancelAppointment(id) {
     this.appointment.status = 'cancelled';
     console.log(this.appointment);
+
     return this.http
       .put(this.apiURL + '/appointment/' + id, this.appointment, {
         headers: { 'Content-Type': 'application/json' },
@@ -146,7 +159,14 @@ export class AppComponent {
   }
 
   popupConfirm() {
-    alert('Votre RDV est confirmé');
+    let message = this.toggle
+      ? 'Votre rendez-vous a bien été confirmé'
+      : "Votre rendez-vous n'est plus confirmé";
+    this.snackBar.open(message, 'X', {
+      panelClass: 'notif',
+      verticalPosition: 'top',
+      duration: 2000
+    });
     this.toggle = !this.toggle;
     this.status = this.toggle ? 'enable' : 'disable';
   }
