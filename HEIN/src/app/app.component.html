@@ -61,33 +61,37 @@
     </tbody>
   </table>
 </div>
-<table class="table table-unbordered chat">
-  <tbody>
-    <tr>
-      <th>
-        <mat-card
-          class="card-bar-patient"
-          *ngFor="let communication of comPat"
-          color="primary"
-          >{{ communication.payload[0].contentString }}</mat-card
-        >
-        <input class="champ" (keyup)="onKey($event)" onfocus="this.value=''" />
-        <button
-          class="handle-btn"
-          mat-button
-          (click)="postCommunication(value)"
-        >
-          Confirmer
-        </button>
-      </th>
-      <th>
-        <mat-card
-          class="card-bar-medecin"
-          *ngFor="let communication of comMed"
-          color="primary"
-          >{{ communication.payload[0].contentString }}</mat-card
-        >
-      </th>
-    </tr>
-  </tbody>
-</table>
+<hr noshade width="300" size="3" />
+<div class="messages">
+  <div class="sent-messages">
+    <table class="table table-unbordered chat">
+      <tbody>
+        <tr>
+          <th>
+            <mat-card
+              class="card-bar-patient"
+              *ngFor="let communication of comPat"
+              color="primary"
+              >{{ communication.payload[0].contentString }}</mat-card
+            >
+          </th>
+          <th>
+            <mat-card
+              class="card-bar-medecin"
+              *ngFor="let communication of comMed"
+              color="primary"
+              >{{ communication.payload[0].contentString }}</mat-card
+            >
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="send-bar">
+    <input class="champ" (keyup)="onKey($event)" onfocus="this.value=''" />
+
+    <button class="mat-btn" mat-button (click)="postCommunication(value)">
+      Envoyer
+    </button>
+  </div>
+</div>

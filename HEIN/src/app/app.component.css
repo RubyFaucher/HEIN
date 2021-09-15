@@ -25,12 +25,23 @@ mat-toolbar {
   background: linear-gradient(to right, #ff0065, #ff4f63, #ffb58a);
   border-radius: 20px 20px 20px 0px;
   margin-top: 10px;
+  height: auto;
+  width: auto;
 }
 
 .card-bar-medecin {
-  background: linear-gradient(to left, #ff0065, #ff4f63, #ffb58a);
+  background: linear-gradient(to right, #8000ff, #4f8dff, #8ac9ff);
+
   border-radius: 20px 20px 0px 20px;
   margin-top: 10px;
+  height: auto;
+  width: auto;
+}
+.chat {
+  width: 70%;
+}
+.card-bar-medecin:first-child {
+  margin-top: 100px;
 }
 /*
 .card-bar-hidden{
@@ -92,10 +103,6 @@ mat-toolbar {
   width: 250px;
 }
 
-.chat {
-  width: 50%;
-}
-
 .champ {
   margin-top: 10px;
   height: 25px;
@@ -106,4 +113,36 @@ mat-toolbar {
   font-family: roboto;
   color: #434343;
   font-style: italic;
+}
+.messages {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.send-bar {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.sent-messages {
+  overflow: scroll;
+  height: 200px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.mat-btn {
+  background-color: #ff4f63;
+  margin-right: 5%;
+  color: white;
+  width: 120px;
+  height: 40px;
+  border-radius: 10px;
+  justify-content: center;
+  text-align: center;
+  margin-left: 20px;
 }
