@@ -14,6 +14,7 @@
 <div class="text">
   <table className="table table-unbordered">
     <tbody>
+
       <tr>
         <th>
           <p class="docName">
@@ -28,7 +29,7 @@
         </th>
         <th>
           <div>
-            <button class="handle-btn" mat-button (click)="popupConfirm()">
+            <button class="handle-btn" mat-button (click)="popupConfirm()" [ngClass]="{'handle-btn' : toggle, 'red': !toggle}">
               Confirmer le RDV
             </button>
           </div>
@@ -48,6 +49,7 @@
           </div>
         </th>
       </tr>
+
     </tbody>
   </table>
 </div>
@@ -58,6 +60,8 @@
         <mat-card
           class="card-bar-patient"
           *ngfor ="let messagepatient of message_patient"
+
+
           color="primary"
           >{{ messagepatient.payload[0].contentString}}</mat-card
         >
@@ -74,6 +78,7 @@
         <mat-card
           class="card-bar-medecin"
           *ngfor ="let messagemedecin of message_medecin"
+
           color="primary"
           >{{ messagemedecin.payload[0].contentString }}</mat-card
         >

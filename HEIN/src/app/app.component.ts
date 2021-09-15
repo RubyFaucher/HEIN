@@ -22,6 +22,7 @@ export class AppComponent {
   com: any = {};
   message_patient: any = {};
   message_medecin: any = {};
+
   appointment: any = {};
 
   constructor(private http: HttpClient, public matDialog: MatDialog) {
@@ -78,10 +79,12 @@ export class AppComponent {
           this.message_patient = message_patient;
         }
       }
+
     });
   }
 
   postCommunication(YourTextData) {
+    window.location.reload()
     return this.http
       .post(
         this.apiURL + '/communication',
@@ -96,6 +99,7 @@ export class AppComponent {
           //   reference: 'Patient/613f4788a5b46400122cf50e'
           // }
           // ],
+
           recipient: [
             {
               reference: 'Patient/613f4788a5b46400122cf50e'
