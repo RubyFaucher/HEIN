@@ -21,10 +21,15 @@
               >Docteur <span class="name">{{ doctor.name[0].family }}</span></b
             >
           </p>
-          <p>Date du rdv : {{ appointment?.requestedPeriod[0].start }}</p>
-          <p>Durée du rdv : {{ appointment?.minutesDuration }} min</p>
-          <p>Numero du rdv : {{ appointment?.id }}</p>
-          <p>Retard de X minutes</p>
+          <div *ngIf="appointment.status != 'cancelled'">
+            <p>Date du rdv : {{ appointment?.requestedPeriod[0].start }}</p>
+            <p>Durée du rdv : {{ appointment?.minutesDuration }} min</p>
+            <p>Numero du rdv : {{ appointment?.id }}</p>
+            <p>Retard de X minutes</p>
+          </div>
+          <div *ngIf="appointment.status == 'cancelled'">
+            <h3 class="pasRdv">Vous n'avez pas de RDV</h3>
+          </div>
         </th>
         <th>
           <div>
@@ -46,7 +51,7 @@
             <button
               class="handle-btn"
               mat-button
-              (click)="delAppointment(appointment.id)"
+              (click)="cancelAppointment(appointment.id)"
             >
               Annuler le RDV
             </button>
@@ -62,9 +67,9 @@
       <th>
         <mat-card
           class="card-bar-patient"
-          *ngfor="let messagepatient of message_patient"
+          *ngFor="let communication of comPat"
           color="primary"
-          >{{ messagepatient.payload[0].contentString }}</mat-card
+          >{{ communication.payload[0].contentString }}</mat-card
         >
         <input class="champ" (keyup)="onKey($event)" onfocus="this.value=''" />
         <button
@@ -78,9 +83,9 @@
       <th>
         <mat-card
           class="card-bar-medecin"
-          *ngfor="let messagemedecin of message_medecin"
+          *ngFor="let communication of comMed"
           color="primary"
-          >{{ messagemedecin.payload[0].contentString }}</mat-card
+          >{{ communication.payload[0].contentString }}</mat-card
         >
       </th>
     </tr>

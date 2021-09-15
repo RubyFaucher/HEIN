@@ -16,7 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ModalComponent } from './modal/modal.component';
 import { ReportModalComponent } from './reportModal/reportModal.component';
-
 @NgModule({
   declarations: [AppComponent, ModalComponent, ReportModalComponent],
   imports: [
@@ -34,8 +33,8 @@ import { ReportModalComponent } from './reportModal/reportModal.component';
     MatInputModule,
     FormsModule,
     MatSnackBarModule
-  ],
 
+  ],
   providers: [AppComponent],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent, ReportModalComponent]

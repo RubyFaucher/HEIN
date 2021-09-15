@@ -25,6 +25,8 @@ export class AppComponent {
   message_patient: any = {};
   message_medecin: any = {};
 
+  comMed = [];
+  comPat = [];
   appointment: any = {};
 
   constructor(
@@ -73,22 +75,19 @@ export class AppComponent {
 
   getCommunication() {
     return this.http.get(this.apiURL + '/communication').forEach(com => {
-      this.com = com;
-
       for (let i in com) {
         if (
           com[i].recipient[0].reference ==
           'Practitioner/613f51d8a5b46400122cf511'
         ) {
-          let messagemed = com[i];
-          this.message_medecin = messagemed;
-          console.log(this.com);
+          let messageMed = com[i];
+          this.comMed.push(messageMed);
         }
         if (
           com[i].recipient[0].reference == 'Patient/613f4788a5b46400122cf50e'
         ) {
-          let message_patient = com[i];
-          this.message_patient = message_patient;
+          let messagePat = com[i];
+          this.comPat.push(messagePat);
         }
       }
     });
@@ -105,11 +104,6 @@ export class AppComponent {
             status: 'generated',
             div: '<div xmlns="http://www.w3.org/1999/xhtml">Test</div>'
           },
-          // subject: [
-          //   {
-          //   reference: 'Patient/613f4788a5b46400122cf50e'
-          // }
-          // ],
 
           recipient: [
             {
@@ -146,18 +140,19 @@ export class AppComponent {
     });
   }
 
-  delAppointment(id) {
-    this.snackBar.open('Votre rendez-vous a bien été annulé', 'X', {
-      panelClass: 'notif',
-      verticalPosition: 'top',
-      duration: 2000
-    });
+  cancelAppointment(id) {
+    this.appointment.status = 'cancelled';
+    console.log(this.appointment);
+
     return this.http
-      .delete(this.apiURL + '/appointment/' + id)
-      .forEach(appointment => {
-        console.log(appointment);
+      .put(this.apiURL + '/appointment/' + id, this.appointment, {
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .subscribe(data => {
+        console.log('apres put', data);
       });
   }
+
   popupConfirm() {
     this.confirmedMessage = this.toggle
       ? 'Annuler la confirmation du RDV'

@@ -101,3 +101,9 @@ mat-toolbar {
   height: 25px;
   width: 350px;
 }
+
+.pasRdv {
+  font-family: roboto;
+  color: #434343;
+  font-style: italic;
+}
