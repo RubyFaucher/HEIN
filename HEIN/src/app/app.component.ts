@@ -22,10 +22,8 @@ export class AppComponent {
   status = 'enable';
   comMed=[];
   comPat=[];
-
   appointment: any = {};
   com: any = {};
-  // messageMed: any={};
 
   constructor(
     private http: HttpClient,
@@ -110,7 +108,8 @@ export class AppComponent {
 
           recipient: [
             {
-              reference: 'Practitioner/613f51d8a5b46400122cf511',
+              reference: 'Patient/613f4788a5b46400122cf50e',
+            }
 
           ],
           payload: [
