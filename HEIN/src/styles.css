@@ -18,3 +18,15 @@ mat-dialog-container {
   background-color: #ffb58a !important;
   color: white !important;
 }
+.mat-tab-label {
+  color: #ffffff !important;
+}
+.mat-tab-label-active {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+.mat-ink-bar {
+  color: #ffb58a !important;
+  background-color: #ffb58a !important;
+  height: 4px !important;
+}
