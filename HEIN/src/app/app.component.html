@@ -70,7 +70,7 @@
           class="card-bar-patient"
           *ngFor="let communication of comPat"
           color="primary"
-          >{{ messagepatient.payload[0].contentString}}</mat-card
+          >{{ communication.payload[0].contentString}}</mat-card
         >
         <input class="champ" (keyup)="onKey($event)" onfocus="this.value=''" />
         <button
@@ -84,10 +84,9 @@
       <th>
         <mat-card
           class="card-bar-medecin"
-          *ngfor ="let communication of comMed"
-
+          *ngFor="let communication of comMed"
           color="primary"
-          >{{ communication.payload[0].contentString }}</mat-card
+          >{{ communication.payload[0].contentString}}</mat-card
         >
       </th>
     </tr>
